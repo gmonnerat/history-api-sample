@@ -1,0 +1,22 @@
+init_tasks:
+  - command: "go-bindata static/... templates/..."
+
+watchers:
+  - extension: go
+    excludes:
+      - bindata.go
+    tasks:
+      - command: "go test"
+
+  - extension: js
+    directory: static
+    tasks:
+      - command: "go-bindata static/... templates/..."
+      - command: "/usr/bin/node /usr/share/node-jslint/node_modules/jslint/bin/jslint.js --indent 2 static/js/app.js"
+
+
+  - extension: tmpl
+    directory: templates
+    tasks:
+      - command: "go-bindata static/... templates/..."
+      - command: "go test"
