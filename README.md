@@ -5,6 +5,6 @@ My example using History interface.
 ## Usage
 
 ```
-$ git install https://github.com/gmonnerat/history-api-sample.git
+$ go install github.com/gmonnerat/history-api-sample
 $ $GOPATH/bin/history-api-sample
 ```
