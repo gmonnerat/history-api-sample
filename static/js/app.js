@@ -19,10 +19,6 @@
     }
   }
 
-  function handlePopState(evt) {
-    console.log(evt);
-  }
-
   function handleUrlChange() {
     var url = "/html" + window.location.pathname, httpRequest = new XMLHttpRequest();
     httpRequest.open('GET', url, true);
@@ -31,8 +27,10 @@
   }
 
   function handleClick(evt) {
-    history.pushState(null, null, evt.srcElement.pathname);
-    evt.preventDefault();
+    if (evt.target && evt.target.nodeName === 'A' && evt.button === 0) {
+      history.pushState(null, null, evt.srcElement.pathname);
+      evt.preventDefault();
+    }
   }
 
   history.pushState = wrapper('pushState');
@@ -40,7 +38,6 @@
 
   // Update page when back() or forward() is triggered
   window.onpopstate = handleUrlChange;
-  
   window.addEventListener('pushState', handleUrlChange);
   window.addEventListener('replaceState', handleUrlChange);
 
